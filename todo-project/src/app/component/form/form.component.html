@@ -1,0 +1,23 @@
+<form [formGroup]="taskForm"  (ngSubmit)="createTask()">
+    <mat-grid-list cols="1" rowHeight="100px">
+        <mat-grid-tile>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Add Task</mat-label>
+                <input matInput placeholder="ex. Task"  formControlName="nameTask">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill" type="number">
+                <mat-label>Add Estimed Time</mat-label>
+                <input matInput placeholder="1 Hora"  formControlName="timeTask">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill" type="number">
+                <mat-label>Add State Task</mat-label>
+                <input matInput placeholder="Pending"  formControlName="stateTask">
+            </mat-form-field>
+            <p><button type="submit" mat-raised-button [disabled]="taskForm.invalid" >Add Task</button></p>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <button (click)="sendTaskPending()">Enviar Task</button>
+    <button (click)="sendTaskInProgress()">Enviar Task</button>
+    <button (click)="sendTaskTodo()">Enviar Task</button>
+    <button (click)="sendTaskDone()">Enviar Task</button>
+</form>

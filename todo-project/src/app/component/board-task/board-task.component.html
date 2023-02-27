@@ -1,0 +1,94 @@
+<form [formGroup]="taskForm">
+  <mat-grid-list cols="1" rowHeight="100px">
+      <mat-grid-tile>
+          <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Add Task</mat-label>
+              <input matInput placeholder="ex. Task"  formControlName="item">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill" type="number">
+              <mat-label>Add Estimed Time</mat-label>
+              <input matInput placeholder="1 Hora"  formControlName="time">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill" type="number">
+              <mat-label>State</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option value="pending">Pending</mat-option>
+                <mat-option value="todo">Todo</mat-option>
+                <mat-option value="inprogress">InProgress</mat-option>
+                <mat-option value="done">Done</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <p><button (click)="createTask()" mat-raised-button [disabled]="taskForm.invalid">Add Task</button></p>
+      </mat-grid-tile>
+  </mat-grid-list>
+</form>
+
+<div cdkDropListGroup>
+    <mat-grid-list cols="4">
+        <mat-grid-tile colspan="1" rowspan="1" style="background-color: green;">
+            <mat-divider></mat-divider>
+            <div class="container">
+                <h2>Pending</h2>
+                <div
+                  cdkDropList
+                  [cdkDropListData]="pending"
+                  class="list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="box" *ngFor="let item of pending; let i = index" cdkDrag>{{item}}
+                    <div class="box-btn">
+                      <button mat-icon-button color="red" (click)="deleteTask(i)"><mat-icon>Delete</mat-icon></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1" style="background-color: yellow;">
+            <div class="container">
+                <h2>To Do</h2>
+                <div
+                  cdkDropList
+                  [cdkDropListData]="todo"
+                  class="list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="box" *ngFor="let item of todo; let i = index" cdkDrag>{{item}}
+                    <div class="box-btn">
+                      <button mat-icon-button color="red" (click)="deleteTask(i)"><mat-icon>Delete</mat-icon></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1" style="background-color: orange;">
+            <div class="container">
+                <h2>In Progress</h2>
+                <div
+                  cdkDropList
+                  [cdkDropListData]="inProgress"
+                  class="list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="box" *ngFor="let item of inProgress; let i = index" cdkDrag>{{item}}
+                    <div class="box-btn">
+                      <button mat-icon-button color="red" (click)="deleteTask(i)"><mat-icon>Delete</mat-icon></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1" style="background-color: purple;">
+            <div class="container">
+                <h2>Done</h2>
+                <div
+                  cdkDropList
+                  [cdkDropListData]="done"
+                  class="list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="box" *ngFor="let item of done; let i = index" cdkDrag>{{item}}
+                    <div class="box-btn">
+                      <button mat-icon-button color="red" (click)="deleteTask(i)"><mat-icon>Delete</mat-icon></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
